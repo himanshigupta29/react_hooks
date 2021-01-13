@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,6 +17,18 @@ function SongList() {
         ])
     };
 
+    const [age, setAge] = useState(8);
+
+    useEffect(() => {
+        console.log('songs changed notify ', songs); // limiting when to call this callback function, only when songs change
+    }, [songs]);
+
+
+    useEffect(() => {
+        console.log('Age changed notify ', age); 
+    }, [age]);
+
+
     return (
         <div  className= 'song-list'>
             <ul>
@@ -33,6 +45,11 @@ function SongList() {
             </ul>
 
             <NewSongForm addSong = {addSong} />
+
+            <button onClick = {() => setAge(age+1) }>
+                my age is {age}
+            </button>
+
         </div>
     )
 }
